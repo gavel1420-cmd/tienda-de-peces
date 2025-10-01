@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Mundo Submarino</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        .cart-item h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .cart-item p {
+            margin: 5px 0;
+        }
+        .btn-eliminar {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 15px;
+            border-radius: 4px;
+        }
+        .btn-eliminar:hover {
+            background-color: #e60000;
+        }
+        .cart-total {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .btn-comprar {
+            display: block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #00b300;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-comprar:hover {
+            background-color: #008000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <img class="logo" src="icono.png" alt="Logo de la marca">
+                <h1 class="title">Mundo Submarino</h1>
+            </div>
+            <nav aria-label="principal">
+                <a href="index.html" class="btn-login">Inicio</a>
+                <a href="contacto.html" class="btn-login">Contacto</a>
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="carrito.html" class="btn-login">Carrito</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>Carrito de Compras</h2>
+                <div class="cart-items">
+                    <!-- Productos del carrito -->
+                </div>
+                <p class="cart-total"></p>
+                <button class="btn-comprar">Realizar Compra</button>
+            </section>
+        </main>
+
+        <footer>
+            © 2025 Mundo Submarino
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartContainer = document.querySelector(".cart-items");
+            const cartTotalEl = document.querySelector(".cart-total");
+            const btnComprar = document.querySelector(".btn-comprar");
+
+            function limpiarPrecio(precioStr) {
+                // Elimina todo lo que no sea número
+                return parseFloat(precioStr.replace(/[^0-9]/g, ""));
+            }
+
+            function renderCart() {
+                cartContainer.innerHTML = "";
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = "<p>Tu carrito está vacío.</p>";
+                    cartTotalEl.textContent = "";
+                    btnComprar.style.display = "none";
+                } else {
+                    btnComprar.style.display = "block";
+                    let total = 0;
+
+                    cart.forEach((product, index) => {
+                        const item = document.createElement("div");
+                        item.classList.add("cart-item");
+                        item.innerHTML = `
+                            <img src="${product.image}" alt="${product.title}">
+                            <div>
+                                <h4>${product.title}</h4>
+                                <p>${product.price}</p>
+                            </div>
+                            <button class="btn-eliminar" data-index="${index}">Eliminar</button>
+                        `;
+                        cartContainer.appendChild(item);
+
+                        total += limpiarPrecio(product.price);
+                    });
+
+                    cartTotalEl.textContent = "Total: $" + total.toLocaleString("es-AR") + " ARS";
+
+                    // Eliminar productos individualmente
+                    const buttons = cartContainer.querySelectorAll(".btn-eliminar");
+                    buttons.forEach(btn => {
+                        btn.addEventListener("click", () => {
+                            const index = btn.getAttribute("data-index");
+                            cart.splice(index, 1);
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                            renderCart();
+                        });
+                    });
+                }
+            }
+
+            // Botón para realizar compra
+            btnComprar.addEventListener("click", () => {
+                if (confirm("¿Deseas confirmar la compra?")) {
+                    localStorage.removeItem("cart");
+                    alert("¡Compra realizada con éxito!");
+                    renderCart();
+                }
+            });
+
+            renderCart();
+        });
+    </script>
+</body>
+</html>

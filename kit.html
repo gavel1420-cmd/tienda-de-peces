@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Articulos de limpieza - Mundo Submarino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="brand">
+            <img class="logo" src="icono.png" alt="Logo de la marca" />
+            <h1 class="title">Mundo Submarino</h1>
+        </div>
+        <nav aria-label="principal">
+            <a href="index.html" class="btn-login">Inicio</a>
+            <a href="contacto.html" class="btn-login">Contacto</a>
+            <a href="login.html" class="btn-login">Iniciar sesión</a>
+            <a href="carrito.html" class="btn-login">Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Artículos de limpieza</h2>
+        <section class="fish-list">
+
+            <article class="fish-item">
+                <img src="kit1.png" alt="Limpiavidrio" class="product-peces">
+                <h4>Limpiavidrio Magnético</h4> 
+                <p>Precio: $14.600 ARS</p>
+                <p class="descripcion">Limpia acuarios de hasta 6mm. Práctico, fácil de usar y conveniente.</p>
+            </article>
+
+            <article class="fish-item">
+                <img src="kit2.png" alt="Sifón" class="product-peces">
+                <h4>Limpia Grava Sifón 20 Cm</h4>
+                <p>Precio: $17.900 ARS</p>
+                <p class="descripcion">Limpieza eficiente de la grava, autocebante, recomendado para acuarios hasta 20 cm de alto.</p>
+            </article>
+
+            <article class="fish-item">
+                <img src="kit3.png" alt="Clarity" class="product-peces">
+                <h4>Seachem Clarity 250ml</h4>
+                <p>Precio: $38.800 ARS</p>
+                <p class="descripcion">Clarificador de agua dulce y salada, seguro para peces y plantas, elimina turbidez.</p>
+            </article>
+
+            <article class="fish-item">
+                <img src="kit4.png" alt="Bonacqua" class="product-peces">
+                <h4>Acondicionador Bonacqua 1L</h4>
+                <p>Precio: $7.400 ARS</p>
+                <p class="descripcion">Neutraliza cloro y bacterias, mantiene un ambiente seguro y saludable.</p>
+            </article>
+
+            <article class="fish-item">
+                <img src="kit5.png" alt="Kit Pennplax" class="product-peces">
+                <h4>Kit Limpieza Pennplax</h4>
+                <p>Precio: $22.500 ARS</p>
+                <p class="descripcion">Kit práctico y eficiente para el cuidado del acuario.</p>
+            </article>
+
+            <article class="fish-item">
+                <img src="kit6.png" alt="Combo Acuario" class="product-peces">
+                <h4>Combo Acondicionador</h4>
+                <p>Precio: $22.500 ARS</p>
+                <p class="descripcion">Combo completo de acondicionador, clarificador y alguicida para acuarios.</p>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Mundo Submarino
+    </footer>
+</div>
+
+<!-- Modal Global -->
+<div id="modalProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar">&times;</span>
+    <div class="modal-body">
+      <img id="modalImagen" src="" alt="Producto">
+      <div class="modal-texto">
+        <h2 id="modalTitulo"></h2>
+        <p id="modalPrecio"></p>
+        <p id="modalDescripcion"></p>
+        <button class="btn-carrito" id="btnAgregarModal">Agregar al carrito →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.fish-item');
+    const modal = document.getElementById('modalProducto');
+    const modalImage = document.getElementById('modalImagen');
+    const modalTitle = document.getElementById('modalTitulo');
+    const modalPrice = document.getElementById('modalPrecio');
+    const modalDesc = document.getElementById('modalDescripcion');
+    const closeBtn = document.querySelector('.cerrar');
+    let productoActual = {};
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const imgEl = item.querySelector('img');
+            const titleEl = item.querySelector('h4');
+            const priceEl = item.querySelector('p');
+            const descEl = item.querySelector('.descripcion');
+
+            productoActual = {
+                title: titleEl.textContent.trim(),
+                price: priceEl.textContent.trim(),
+                description: descEl ? descEl.textContent.trim() : '',
+                image: imgEl.getAttribute('src')
+            };
+
+            modalImage.src = productoActual.image;
+            modalTitle.textContent = productoActual.title;
+            modalPrice.textContent = productoActual.price;
+            modalDesc.textContent = productoActual.description;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape' && modal.style.display==='block') closeModal(); });
+
+    document.getElementById('btnAgregarModal').addEventListener('click', () => {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(productoActual);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(productoActual.title + " agregado al carrito ✅");
+        closeModal();
+    });
+});
+</script>
+</body>
+</html>

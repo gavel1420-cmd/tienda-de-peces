@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peces en Venta - Mundo Submarino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="brand">
+            <img class="logo" src="icono.png" alt="Logo de la marca" />
+            <h1 class="title">Mundo Submarino</h1>
+        </div>
+        <nav aria-label="principal">
+            <a href="index.html" class="btn-login">Inicio</a>
+            <a href="contacto.html" class="btn-login">Contacto</a>
+            <a href="login.html" class="btn-login">Iniciar sesión</a>
+            <a href="carrito.html" class="btn-login">Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Peces en Venta</h2>
+        <section class="fish-list">
+
+            <article class="fish-item" onclick="abrirModal('Pez Dorado','7000','Un pez popular y fácil de cuidar, vistoso y activo, requiere ambiente acuático adecuado.','Goldfish.png')">
+                <img class="product-peces" src="Goldfish.png" alt="Pez Dorado" />
+                <h4>Pez Dorado</h4>
+                <p>Precio: $7.000 ARS C/U</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Guppy','6000','Fácil de cuidar, excelente para principiantes.','guppy.png')">
+                <img class="product-peces" src="guppy.png" alt="Guppy" />
+                <h4>Guppy</h4>
+                <p>Precio: $6.000 ARS SURTIDO</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Neón Tetra','10000','Pequeño y pacífico, se adapta bien a acuarios plantados.','neon tetra.png')">
+                <img class="product-peces" src="neon tetra.png" alt="Neón Tetra" />
+                <h4>Neón Tetra</h4>
+                <p>Precio: $10.000 x10</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Betta','11000','Colores vibrantes, territorial pero hermoso.','betta.png')">
+                <img class="product-peces" src="betta.png" alt="Betta" />
+                <h4>Betta</h4>
+                <p>Precio: $11.000 ARS C/U</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Oscar','20000','Pez grande, inteligente y con personalidad.','oscar.png')">
+                <img class="product-peces" src="oscar.png" alt="Oscar" />
+                <h4>Oscar</h4>
+                <p>Precio: $20.000 ARS C/U</p>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Mundo Submarino
+    </footer>
+</div>
+
+<!-- Modal global -->
+<div id="modalProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <div class="modal-body">
+      <img id="modalImagen" src="" alt="Producto">
+      <div class="modal-texto">
+        <h2 id="modalTitulo"></h2>
+        <p id="modalPrecio"></p>
+        <p id="modalDescripcion"></p>
+        <button class="btn-carrito" id="btnAgregarModal">Agregar al carrito →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let productoActual = {}; // Guardar producto temporalmente
+
+function abrirModal(nombre, precio, descripcion, imagen) {
+  productoActual = { title: nombre, price: precio, description: descripcion, image: imagen };
+
+  document.getElementById("modalTitulo").innerText = nombre;
+  document.getElementById("modalPrecio").innerText = "Precio: $" + precio;
+  document.getElementById("modalDescripcion").innerText = descripcion;
+  document.getElementById("modalImagen").src = imagen;
+  document.getElementById("modalProducto").style.display = "block";
+}
+
+function cerrarModal() {
+  document.getElementById("modalProducto").style.display = "none";
+}
+
+// 🔹 Agregar al carrito
+document.getElementById("btnAgregarModal").addEventListener("click", () => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(productoActual);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(productoActual.title + " agregado al carrito ✅");
+  cerrarModal();
+});
+
+// 🔹 Cerrar modal si se hace clic en el fondo
+window.onclick = function(event) {
+  let modal = document.getElementById("modalProducto");
+  if (event.target === modal) { modal.style.display = "none"; }
+}
+</script>
+
+</body>
+</html>

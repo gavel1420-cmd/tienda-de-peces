@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comida para Peces - Mundo Submarino</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <img class="logo" src="icono.png" alt="Logo de la marca" />
+      <h1 class="title">Mundo Submarino</h1>
+    </div>
+    <nav aria-label="principal">
+      <a href="index.html" class="btn-login">Inicio</a>
+      <a href="contacto.html" class="btn-login">Contacto</a>
+      <a href="login.html" class="btn-login">Iniciar sesión</a>
+      <a href="carrito.html" class="btn-login">Carrito</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Comida para peces</h2>
+    <section class="fish-list">
+      <article class="fish-item">
+        <img src="comida1.png" alt="Comida 1" class="product-peces">
+        <h4>Alimento Peces Shulet Tropical 150 Gr Escamado</h4>
+        <p>Precio: $16.300 ARS</p>
+        <p class="descripcion">SHULET TROPICAL 150gr es un alimento en escamas para peces tropicales. Contiene mezcla nutritiva de ingredientes como harinas de pescado, cereales, algas y más.</p>
+      </article>
+
+      <article class="fish-item">
+        <img src="comida2.png" alt="Comida 2" class="product-peces">
+        <h4>Tetra goldfish variety pellets 53gr</h4>
+        <p>Precio: $10.800 ARS</p>
+        <p class="descripcion">Dieta óptima para Goldfish, mantiene el agua más limpia y clara. Enriquecida con tecnología ProCare™.</p>
+      </article>
+
+      <article class="fish-item">
+        <img src="comida3.png" alt="Comida 3" class="product-peces">
+        <h4>Alimento En Escamas Peces Agua Fría 1/2 Kg</h4>
+        <p>Precio: $63.200 ARS</p>
+        <p class="descripcion">Contiene nutrientes de gran calidad con vitaminas, omega 3 y minerales. Excelente aceptación por peces ornamentales.</p>
+      </article>
+
+      <article class="fish-item">
+        <img src="comida4.png" alt="Comida 4" class="product-peces">
+        <h4>15kg Alimento Granulado Carrassius Carpas Koi</h4>
+        <p>Precio: $94.800 ARS</p>
+        <p class="descripcion">Granulado de 5mm ideal para carpas koi y carrassius grandes. 30% proteínas.</p>
+      </article>
+
+      <article class="fish-item">
+        <img src="comida5.png" alt="Comida 5" class="product-peces">
+        <h4>Tetra Alimento En Gel Tetraweekend 24 Gr</h4>
+        <p>Precio: $11.500 ARS</p>
+        <p class="descripcion">Pack de 2 bloques de 24 g para alimentar peces durante ausencias prolongadas. Formato en gel que asegura alimentación continua.</p>
+      </article>
+
+      <article class="fish-item">
+        <img src="comida6.png" alt="Comida 6" class="product-peces">
+        <h4>Sanders Huevos De Artemia 20gr</h4>
+        <p>Precio: $13.990 ARS</p>
+        <p class="descripcion">Huevos de artemia importados (USA) con 80% de eclosión asegurada. Ideal para alevinos.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Mundo Submarino
+  </footer>
+</div>
+
+<!-- Modal Global -->
+<div id="modalProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar">&times;</span>
+    <div class="modal-body">
+      <img id="modalImagen" src="" alt="Producto">
+      <div class="modal-texto">
+        <h2 id="modalTitulo"></h2>
+        <p id="modalPrecio"></p>
+        <p id="modalDescripcion"></p>
+        <button class="btn-carrito" id="btnAgregarModal">Agregar al carrito →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.fish-item');
+    const modal = document.getElementById('modalProducto');
+    const modalImage = document.getElementById('modalImagen');
+    const modalTitle = document.getElementById('modalTitulo');
+    const modalPrice = document.getElementById('modalPrecio');
+    const modalDesc = document.getElementById('modalDescripcion');
+    const closeBtn = document.querySelector('.cerrar');
+    let productoActual = {};
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const imgEl = item.querySelector('img');
+            const titleEl = item.querySelector('h4');
+            const priceEl = item.querySelector('p');
+            const descEl = item.querySelector('.descripcion');
+
+            productoActual = {
+                title: titleEl.textContent.trim(),
+                price: priceEl.textContent.trim(),
+                description: descEl ? descEl.textContent.trim() : '',
+                image: imgEl.getAttribute('src')
+            };
+
+            modalImage.src = productoActual.image;
+            modalTitle.textContent = productoActual.title;
+            modalPrice.textContent = productoActual.price;
+            modalDesc.textContent = productoActual.description;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape' && modal.style.display==='block') closeModal(); });
+
+    document.getElementById('btnAgregarModal').addEventListener('click', () => {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(productoActual);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(productoActual.title + " agregado al carrito ✅");
+        closeModal();
+    });
+});
+</script>
+</body>
+</html>

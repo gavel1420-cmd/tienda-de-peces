@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acuarios - Mundo Submarino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a href="index.html">
+    <img class="flecha" src="flecha.png" alt="Inicio" style="width: 120px; cursor: pointer;">
+  </a>
+<div class="container">
+    <header>
+        <div class="brand">
+            <img class="logo" src="icono.png" alt="Logo de la marca" />
+            <h1 class="title">Mundo Submarino</h1>
+        </div>
+        <nav aria-label="principal">
+            <a href="index.html" class="btn-login">Inicio</a>
+            <a href="contacto.html" class="btn-login">Contacto</a>
+            <a href="login.html" class="btn-login">Iniciar sesión</a>
+            <a href="carrito.html" class="btn-login">Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Acuarios en Venta</h2>
+        <section class="fish-list">
+            <article class="fish-item" onclick="abrirModal('Pecera 35x24x18 3 Mm','10500','Medidas 35cm largo x 24cm de alto x 18cm de profundidad. Vidrio de 3 mm. Sellada con silicona importada de primera calidad.','acuario1.png')"> 
+                <img class="product-peces" src="acuario1.png" alt="Pecera 1" />
+                <h4>Pecera 35x24x18 3 Mm</h4> 
+                <p>Precio: $10.500 ARS</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Kit Pecera Completa-50x35x20 Con 1 Pez (mediano)','38800','Incluye pecera de 50x35x20cm, aireador, placa biológica, anticloro, fondo decorativo, plantas, un Carasuis, grava y alimento.','pecera2.png')">
+                <img class="product-peces" src="pecera2.png" alt="Pecera 2" />
+                <h4>Kit Pecera Completa-50x35x20 Con 1 Pez (mediano)</h4>
+                <p>Precio: $38.800 ARS</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Pecera Cubo 20x20x20 4mm','9650','Características: PECERA CUBO 20x20x20, VIDRIO 4 MM, 8 LITROS. IDEAL PEZ BETTA.','pecera3.png')">
+                <img class="product-peces" src="pecera3.png" alt="Pecera 3" />
+                <h4>Pecera Cubo 20x20x20 4mm</h4>
+                <p>Precio: $9.650 ARS</p>
+            </article>
+
+            <article class="fish-item" onclick="abrirModal('Pecera Cubo 30x30x30','21900','Características: PECERA CUBO 30x30x30cm. Espesor del vidrio 4 mm.','pecera4.png')">
+                <img class="product-peces" src="pecera4.png" alt="Pecera 4" />
+                <h4>Pecera Cubo 30x30x30</h4>
+                <p>Precio: $21.900 ARS</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Mundo Submarino
+    </footer>
+</div>
+
+<!-- 🔹 Modal -->
+<div id="modalProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <div class="modal-body">
+      <img id="modalImagen" src="" alt="Producto">
+      <div class="modal-texto">
+        <h2 id="modalTitulo"></h2>
+        <p id="modalPrecio"></p>
+        <p id="modalDescripcion"></p>
+         <button class="btn-carrito" id="btnAgregarModal">Agregar al carrito →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Script -->
+<script>
+let productoActual = {}; // para guardar temporalmente el producto abierto
+
+function abrirModal(nombre, precio, descripcion, imagen) {
+  productoActual = { title: nombre, price: precio, description: descripcion, image: imagen };
+
+  document.getElementById("modalTitulo").innerText = nombre;
+  document.getElementById("modalPrecio").innerText = "Precio: $" + precio;
+  document.getElementById("modalDescripcion").innerText = descripcion;
+  document.getElementById("modalImagen").src = imagen;
+
+  document.getElementById("modalProducto").style.display = "block";
+}
+
+function cerrarModal() {
+  document.getElementById("modalProducto").style.display = "none";
+}
+
+// 🔹 Agregar al carrito
+document.getElementById("btnAgregarModal").addEventListener("click", () => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(productoActual);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(productoActual.title + " agregado al carrito ✅");
+  cerrarModal();
+});
+
+// 🔹 Cierra el modal si se hace click en el fondo negro
+window.onclick = function(event) {
+  let modal = document.getElementById("modalProducto");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decoraciones - Mundo Submarino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="brand">
+            <img class="logo" src="icono.png" alt="Logo de la marca" />
+            <h1 class="title">Mundo Submarino</h1>
+        </div>
+        <nav aria-label="principal">
+            <a href="index.html" class="btn-login">Inicio</a>
+            <a href="contacto.html" class="btn-login">Contacto</a>
+            <a href="login.html" class="btn-login">Iniciar sesión</a>
+            <a href="carrito.html" class="btn-login">Carrito</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Decoraciones</h2>
+        <section class="fish-list">
+
+            <article class="fish-item"> 
+                <img class="product-peces" src="piedra volcanica.png" alt="Piedra Volcanica" />
+                <h4>Piedra Roca Volcanica Negra Acuarios Plantados Marino X 1 Kg</h4> 
+                <p>Precio: $3.600 ARS</p>
+                <h5 class="truncate">PIEDRA VOLCÁNICA NEGRA INERTE
+NO MODIFICA PARÁMETROS DEL AGUA
+
+IDEALES PARA REALIZAR FORMACIONES ROCOSAS EN EL ACUARIO
+
+PRECIO PUBLICADO POR 1 KG DE ROCA
+
+Una piedra única que viene en varias formas, tamaños. Las piedras son principalmente de color negro , surcos y bordes irregulares. Se usa a menudo en diseños de rocas Iwagumi, pero es versátil y puede crear una gama de estilos dependiendo del uso.
+
+Porosa, ideal para generar volúmen en acuarios con mucha elevación.
+Son de tipo basáltico, básico, pero al ser insolubles no modifican el pH del agua del acuario.</h5>
+            </article>
+
+            <article class="fish-item">
+                <img class="product-peces" src="lamina.png" alt="Lamina fondo" />
+                <h4>Lamina Fondo Para Peceras Acuarios 40x30 Cm Adorno Barco</h4>
+                <p>Precio: $2.890 ARS</p>
+                <h5 class="truncate">Lámina para Pecera Acuario fondo Decoracion
+
+Este adorno presenta un diseño de barco pirata que añade un toque de aventura y creatividad a tu espacio acuático. Fabricada en lámina de alta calidad, su durabilidad asegura que mantendrá su belleza a lo largo del tiempo.
+
+El diseño de barco no solo es visualmente atractivo, sino que también proporciona un ambiente acogedor para tus peces, fomentando su bienestar y actividad.
+
+Medidas: 40x30 cm
+
++ Se pega del lado de afuera con cinta adhesiva.</h5>
+            </article>
+
+            <article class="fish-item">
+                <img class="product-peces" src="casa de espnja.png" alt="Casa Bob Esponja" />
+                <h4>Casa Bob Esponja Mini Piña Adorno Para Acuario 5 Cm</h4>
+                <p>Precio: $11.300 ARS</p>
+                <h5 class="truncate">MINI PIÑA CASA DE BOB ESPONJA
+
+Traiga un poco de Bikini Bottom al acuario de su hijo con este Adorno de Acuario "Mini Piña Casa de Bob Esponja".
+
+- Medida: 5 cm de alto
+- La casa de piña de Bob Esponja es el escondite submarino favorito de todos.
+- Hecho de materiales y colores no tóxicos seguros para los peces.
+- La decoración proporciona refugio y escondite lugares que los peces necesitan para ayudar a reducir el estrés.</h5>
+            </article>
+
+            <article class="fish-item">
+                <img class="product-peces" src="planta de plastico.png" alt="Planta Artificial" />
+                <h4>Tetra Planta Artificial Red Ludwigia 23cm Medium Adorno</h4>
+                <p>Precio: $12.500 ARS</p>
+                <h5 class="truncate">Planta Artificial Tetra Deco Art. RED LUDWIGIA de 23 cm de altura. Importada y de excelente calidad. Disponible en distintos modelos. Ideal para decorar y dar vida a tu acuario. Su diseño realista y su color vibrante aportan un toque de belleza natural a cualquier entorno acuático. Fácil de limpiar y mantener. No requiere de cuidados especiales, lo que la hace perfecta para aquellos que quieren disfrutar de la belleza de las plantas acuáticas sin el mantenimiento que requieren las reales.</h5>
+            </article>
+
+            <article class="fish-item">
+                <img class="product-peces" src="estrella.png" alt="Estrella Culona" />
+                <h4>Adorno Para Pecera Estrella Culona Conicet Unica!!!</h4>
+                <p>Precio: $9.400 ARS</p>
+                <h5 class="truncate">ESTRELLITA CULONA CONICET
+100 % PLA
+APTO PARA PECERAS
+Medida :10 cm x 10 cm x 3 cm.</h5>
+            </article>
+
+            <article class="fish-item">
+                <img class="product-peces" src="caracolas.png" alt="Caracolas" />
+                <h4>Caracoles Mar Mini Encapsulado Dijes Aro Resina Biyu X250u</h4>
+                <p>Precio: $14.200 ARS</p>
+                <h5 class="truncate">El producto ofrece una buena relación entre precio y calidad. Las caracolas son preciosas y vienen en diferentes tamaños, lo que añade variedad. En general, es un producto bien valorado por su estética y calidad.</h5>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Mundo Submarino
+    </footer>
+</div>
+
+<!-- Modal global -->
+<div id="modalProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <div class="modal-body">
+      <img id="modalImagen" src="" alt="Producto">
+      <div class="modal-texto">
+        <h2 id="modalTitulo"></h2>
+        <p id="modalPrecio"></p>
+        <p id="modalDescripcion"></p>
+        <button class="btn-carrito" id="btnAgregarModal">Agregar al carrito →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.fish-item');
+  const modal = document.getElementById('modalProducto');
+  const modalImage = document.getElementById('modalImagen');
+  const modalTitle = document.getElementById('modalTitulo');
+  const modalPrice = document.getElementById('modalPrecio');
+  const modalDesc = document.getElementById('modalDescripcion');
+  const closeBtn = document.querySelector('.cerrar');
+  let productoActual = {}; // objeto temporal para carrito
+
+  // Abrir modal leyendo los datos del propio article
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const imgEl = item.querySelector('img.product-peces');
+      const titleEl = item.querySelector('h4');
+      const priceEl = item.querySelector('p');
+      const descEl = item.querySelector('h5');
+
+      const imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+      const title = titleEl ? titleEl.textContent.trim() : '';
+      const price = priceEl ? priceEl.textContent.trim() : '';
+      const desc = descEl ? descEl.textContent.trim() : '';
+
+      productoActual = { title: title, price: price, description: desc, image: imgSrc };
+
+      modalImage.src = imgSrc;
+      modalTitle.textContent = title;
+      modalPrice.textContent = price;
+      modalDesc.textContent = desc;
+
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Cerrar modal
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') closeModal();
+  });
+
+  // 🔹 Agregar al carrito
+  const btnAgregarModal = document.getElementById('btnAgregarModal');
+  btnAgregarModal.addEventListener('click', () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(productoActual);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(productoActual.title + " agregado al carrito ✅");
+    closeModal();
+  });
+});
+</script>
+</body>
+</html>
