@@ -522,13 +522,11 @@ style.css
 }
 
 .modal-contenido {
-  background: #fff;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 70%;
-  max-width: 800px;
-  animation: aparecer 0.3s ease;
+ background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    animation: aparecer 0.3s ease;
 }
 
 .modal-body {
@@ -537,7 +535,8 @@ style.css
 }
 
 .modal-body img {
-  max-width: 250px;
+  height: 250px;
+  width: auto;
   border-radius: 10px;
 }
 
